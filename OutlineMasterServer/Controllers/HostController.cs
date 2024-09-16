@@ -1,9 +1,5 @@
 ﻿using OutlineMasterServer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Data;
 using System.Web.Http;
 
 namespace OutlineMasterServer.Controllers
@@ -11,9 +7,10 @@ namespace OutlineMasterServer.Controllers
     public class HostController : ApiController
     {
         // GET: api/Host
-        public IEnumerable<string> Get()
+        public DataTable Get()
         {
-            return new string[] { "value1", "value2" };
+            DatabaseInterface DBI = new DatabaseInterface();
+            return DBI.GetAllServers();
         }
 
         // GET: api/Host/5
@@ -23,10 +20,10 @@ namespace OutlineMasterServer.Controllers
         }
 
         // POST: api/Host
-        public void Post(ServerData Data)
+        public int Post(ServerData Data)
         {
             DatabaseInterface DBI = new DatabaseInterface();
-            DBI.PostData(Data);
+            return DBI.PostData(Data);
         }
 
         // PUT: api/Host/5
@@ -37,6 +34,8 @@ namespace OutlineMasterServer.Controllers
         // DELETE: api/Host/5
         public void Delete(int id)
         {
+            DatabaseInterface DBI = new DatabaseInterface();
+            DBI.DeleteData();
         }
     }
 }
