@@ -27,8 +27,10 @@ namespace OutlineMasterServer.Controllers
         }
 
         // PUT: api/Host/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, ServerData Data)
         {
+            DatabaseInterface DBI = new DatabaseInterface();
+            DBI.UpdateServerEntry(Data);
         }
 
         // DELETE: api/Host/5

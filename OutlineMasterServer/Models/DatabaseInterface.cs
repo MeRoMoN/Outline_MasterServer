@@ -110,5 +110,29 @@ namespace OutlineMasterServer.Models
             }
         }
 
+        public void UpdateServerEntry(ServerData Data)
+        {
+            try
+            {
+                SqlConnection.Open();
+
+                MySqlCommand Command = new MySqlCommand("UpdateServerEntry", SqlConnection);
+                Command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
+                Command.Parameters.AddWithValue("_ServerName", Data.ServerName);
+                Command.Parameters.AddWithValue("_MapName", Data.MapName);
+                Command.Parameters.AddWithValue("_CurrentPlayers", Data.CurrentPlayers);
+                Command.Parameters.AddWithValue("_MaxPlayers", Data.MaxPlayers);
+
+                Command.ExecuteNonQuery();
+                SqlConnection.Close();
+                
+            }
+            catch (Exception e)
+            {
+             
+            }
+        }
     }
 }
